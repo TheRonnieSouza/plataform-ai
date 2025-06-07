@@ -52,3 +52,7 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+/scr/backend/PlataformAI/.vs/PlataformAI/FileContentIndex/086b8ec6-d180-43e3-a5e9-2527dba97a70.vsidx
+/scr/backend/PlataformAI/.vs/PlataformAI/v17/.suo
+/scr/backend/PlataformAI/.vs/PlataformAI/v17
+/scr/backend/PlataformAI/appsettings.Development.json
