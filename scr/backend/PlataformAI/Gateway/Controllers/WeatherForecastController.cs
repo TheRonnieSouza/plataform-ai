@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PlataformAI.Controllers
+namespace Gateway.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,4 +1,4 @@
-namespace PlataformAI
+namespace Gateway
 {
     public class WeatherForecast
     {

@@ -9,17 +9,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["PlataformAI.csproj", "."]
-RUN dotnet restore "./PlataformAI.csproj"
+COPY ["Action/Action.csproj", "Action/"]
+RUN dotnet restore "./Action/Action.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./PlataformAI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Action"
+RUN dotnet build "./Action.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./PlataformAI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Action.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "PlataformAI.dll"]
+ENTRYPOINT ["dotnet", "Action.dll"]
