@@ -56,3 +56,7 @@ nunit-*.xml
 /scr/backend/PlataformAI/.vs/PlataformAI/v17/.suo
 /scr/backend/PlataformAI/.vs/PlataformAI/v17
 /scr/backend/PlataformAI/appsettings.Development.json
+/scr/backend/PlataformAI/.vs
+/scr/backend/PlataformAI/Action/appsettings.Development.json
+/scr/backend/PlataformAI/Gateway/appsettings.Development.json
+/scr/backend/PlataformAI/Orchestrator/appsettings.Development.json
