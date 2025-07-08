@@ -10,13 +10,14 @@ namespace Orchestrator.Module
     {
         public static IServiceCollection AddOrchestratorModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSemanticKernel(configuration).
-                     AddConversation();
+            services.AddAzureAIInference(configuration).
+                     AddConversation().
+                     AddSemanticKernel(configuration);
 
             return services;
         }
 
-        private static IServiceCollection AddSemanticKernel(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddAzureAIInference(this IServiceCollection services, IConfiguration configuration)
         {
             var (endpoint, credential ) = GetLlmSettings(configuration);
             services.AddScoped(_ => new ChatCompletionsClient(endpoint, credential));
@@ -41,7 +42,7 @@ namespace Orchestrator.Module
                     return options;
                 };
             });
-
+            
             services.AddScoped<IConversationCompletionService, ConversationCompletionService>();
 
             return services;
