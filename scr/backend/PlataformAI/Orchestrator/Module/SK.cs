@@ -6,16 +6,16 @@ namespace Orchestrator.Module
     {
         public static IServiceCollection AddSemanticKernel(this IServiceCollection services, IConfiguration configuration)
         {
-            var deploymentName = "";
-            var endpoint = "";
-            var apiKey = "";
-
-            IKernelBuilder? builder = Kernel.CreateBuilder().AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey);
+            IKernelBuilder? builder = Kernel.CreateBuilder();
 
             builder.Services.AddAzureOpenAIChatCompletion(
                 configuration["LlmAzureOpenAI:DeploymentName"]!,
                 configuration["LlmAzureOpenAI:Url"]!,
                 configuration["LlmAzureOpenAI:Key"]!);
+
+            Kernel kernel = builder.Build();
+
+            services.AddSingleton(kernel);
 
             return services;
         }
