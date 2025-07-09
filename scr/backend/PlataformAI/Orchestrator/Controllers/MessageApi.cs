@@ -1,6 +1,4 @@
-﻿using Common.CommandHandler;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.SemanticKernel;
+﻿using Microsoft.AspNetCore.Mvc;
 using Orchestrator.Conversation.Ask;
 
 namespace Orchestrator.Controllers
@@ -17,9 +15,9 @@ namespace Orchestrator.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMessage([FromServices] CreateMessageCommandHandler handler, CreateMessageCommand command)
         {
-            await handler.Handle(command, CancellationToken.None);
+           var result = await handler.Handle(command, CancellationToken.None);
 
-            return NoContent();
+            return Ok(result);
         }
         [HttpPut("{id:Guid}")]
         public async Task<IActionResult> UpdateMessage(Guid id)

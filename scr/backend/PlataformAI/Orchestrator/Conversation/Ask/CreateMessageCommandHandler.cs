@@ -6,24 +6,35 @@ namespace Orchestrator.Conversation.Ask
 {
     public class CreateMessageCommandHandler : CommandHandler, ICommandHandler
     {
-        public readonly ISKService _skService;
+        public readonly IConversationCompletionService _chatCompletion;
 
-        public CreateMessageCommandHandler(ISKService skService)
+        public CreateMessageCommandHandler(IConversationCompletionService chatCompletion)
         {
-            _skService = skService; 
+            _chatCompletion = chatCompletion; 
         }
     
-        public  override  Task<EventStream> HandleAsync(ICommand request, CancellationToken token)
+        public  override  async Task<EventStream> HandleAsync(ICommand request, CancellationToken token)
+        {          
+
+           var command = GetCommand(request);
+
+            var messages = new List<string>
+             {
+                 command.message
+             };
+
+            var result = await _chatCompletion.AskAsync(messages);
+
+            var message = new EventStream(result.Content);
+
+            return message;
+        }
+
+        private CreateMessageCommand GetCommand(ICommand request)
         {
-             var Aswer =  _skService.GetChatCompletion(request);
-
-            var intention = _skService.GetIntention(Aswer);
-
-
-
-            var message = new EventStream();
-
-            return Task.FromResult(message);
+            if (request is not CreateMessageCommand command)
+                throw new ArgumentException("Invalid command type", nameof(request));
+            return command;
         }
     }
 }
