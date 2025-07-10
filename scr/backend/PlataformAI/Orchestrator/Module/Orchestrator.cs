@@ -3,6 +3,7 @@ using Azure.AI.Inference;
 using Orchestrator.Conversation;
 using Orchestrator.Conversation.Ask;
 using Orchestrator.Conversation.Factory;
+using Orchestrator.Conversation.LLM;
 
 namespace Orchestrator.Module
 {
@@ -43,7 +44,7 @@ namespace Orchestrator.Module
                 };
             });
             
-            services.AddScoped<IConversationCompletionService, ConversationCompletionService>();
+            services.AddScoped<IConversationCompletionService, AzureAIConversationCompletionService>();
 
             return services;
         }

@@ -23,7 +23,7 @@ namespace Orchestrator.Conversation.Ask
                  command.message
              };
 
-            var result = await _chatCompletion.AskAsync(messages);
+            var result = await _chatCompletion.AskAsync<EventStream>(messages);
 
             var message = new EventStream(result.Content);
 

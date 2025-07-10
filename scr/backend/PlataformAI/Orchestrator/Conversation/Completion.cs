@@ -14,6 +14,11 @@ namespace Orchestrator.Conversation
             throw new NotImplementedException();
         }
 
+        public Task<T> AskAsync<T>(IEnumerable<string> contextMessages)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IReadOnlyList<ChatMessageContent>> GetChatMessageContentsAsync(ChatHistory chatHistory, PromptExecutionSettings? executionSettings = null, Kernel? kernel = null, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
