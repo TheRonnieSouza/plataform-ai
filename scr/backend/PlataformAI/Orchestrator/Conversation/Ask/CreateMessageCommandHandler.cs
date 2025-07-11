@@ -1,6 +1,7 @@
 ﻿using Common.CommandHandler;
 using Common.Commands;
 using Common.Models;
+using Orchestrator.Conversation.Factory;
 
 namespace Orchestrator.Conversation.Ask
 {
@@ -8,20 +9,19 @@ namespace Orchestrator.Conversation.Ask
     {
         public readonly IConversationCompletionService _chatCompletion;
 
-        public CreateMessageCommandHandler(IConversationCompletionService chatCompletion)
+        public CreateMessageCommandHandler(IConversationCompletionFactory chatCompletionFactory)
         {
-            _chatCompletion = chatCompletion; 
+            _chatCompletion = chatCompletionFactory.Create();
         }
-    
-        public  override  async Task<EventStream> HandleAsync(ICommand request, CancellationToken token)
-        {          
 
-           var command = GetCommand(request);
+        public override async Task<EventStream> HandleAsync(ICommand request, CancellationToken token)
+        {
+            var command = GetCommand(request);
 
             var messages = new List<string>
-             {
-                 command.message
-             };
+                {
+                    command.message
+                };
 
             var result = await _chatCompletion.AskAsync<EventStream>(messages);
 

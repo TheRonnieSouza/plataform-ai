@@ -63,6 +63,9 @@ namespace Orchestrator.Module
         private static IServiceCollection AddConversation(this IServiceCollection services)
         {
             services.AddTransient<CreateMessageCommandHandler>();
+            services.AddTransient<AzureAIConversationCompletionService>();
+            services.AddTransient<SemanticKernelCoversationCompletionService>();
+            services.AddTransient<IConversationCompletionFactory, ConversationCompletionFactory>();
 
             return services;
         }
