@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel;
+﻿using Common.Models;
+using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace Orchestrator.Conversation.LLM
@@ -12,7 +13,8 @@ namespace Orchestrator.Conversation.LLM
             _kernel = kernel;
         }
 
-        public Task<Answer> AskAsync<Answer>(IEnumerable<string> contextMessages)
+
+        public async Task<T> AskAsync<T>(IEnumerable<string> contextMessages)
         {
             var  chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
 
@@ -20,9 +22,12 @@ namespace Orchestrator.Conversation.LLM
 
             ChatHistory chatMessageContents = new ChatHistory(message, AuthorRole.System);
 
-           var result = chatCompletionService.GetChatMessageContentAsync(chatMessageContents);
+            var result = await chatCompletionService.GetChatMessageContentAsync(chatMessageContents);
+            
+            var evento =   new EventStream(result);
+            return (T)(object)evento;
 
-            return Task.FromResult<Answer>((Answer)(object)result.Result);
+
         }
     }
 }
