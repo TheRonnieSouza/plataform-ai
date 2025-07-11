@@ -22,7 +22,7 @@ namespace Orchestrator.Conversation.LLM
 
 
             return response.Value is ChatCompletions result ? result : throw new InvalidCastException($"Cannot cast ChatCompletions to type {typeof(ChatCompletions).Name}");
-        }
+        }        
     }
   
 }

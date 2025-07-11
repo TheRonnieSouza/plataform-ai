@@ -20,7 +20,7 @@ namespace Orchestrator.Conversation.LLM
 
             ChatHistory chatMessageContents = new ChatHistory(message, AuthorRole.System);
 
-            var result = chatCompletionService.GetChatMessageContentAsync(chatMessageContents);
+           var result = chatCompletionService.GetChatMessageContentAsync(chatMessageContents);
 
             return Task.FromResult<Answer>((Answer)(object)result.Result);
         }
