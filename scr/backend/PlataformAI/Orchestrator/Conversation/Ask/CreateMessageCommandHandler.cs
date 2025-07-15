@@ -16,25 +16,14 @@ namespace Orchestrator.Conversation.Ask
 
         public override async Task<EventStream> HandleAsync(ICommand request, CancellationToken token)
         {
-            var command = GetCommand(request);
+            var command = (CreateMessageCommand)request;
 
-            var messages = new List<string>
-                {
-                    command.message
-                };
-
-            var result = await _chatCompletion.AskAsync<EventStream>(messages);
+            var result = await _chatCompletion.AskAsync<EventStream>(command.message);
 
             var message = new EventStream(result.Content);
 
             return message;
         }
 
-        private CreateMessageCommand GetCommand(ICommand request)
-        {
-            if (request is not CreateMessageCommand command)
-                throw new ArgumentException("Invalid command type", nameof(request));
-            return command;
-        }
     }
 }

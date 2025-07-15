@@ -2,5 +2,5 @@
 
 namespace Orchestrator.Conversation.Ask
 {
-    public readonly record struct CreateMessageCommand(string message) : ICommand;
+    public readonly record struct CreateMessageCommand(Message message) : ICommand;
 }
