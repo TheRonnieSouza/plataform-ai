@@ -8,7 +8,7 @@ namespace Orchestrator.Conversation.Completion
         //Todo Implent
         public bool CanBuild(Message message)
         {
-            throw new NotImplementedException();
+            return message.Files.Count() > 0;
         }
 
         public ChatHistory CreateChatHistory(Message message)
@@ -21,8 +21,7 @@ namespace Orchestrator.Conversation.Completion
                 {
                     new ImageContent(file.Data, file.ContentType)
                 });
-            } 
-
+            }
             return chatHistory;
         }
     }
