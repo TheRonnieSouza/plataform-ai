@@ -18,7 +18,7 @@ namespace Orchestrator.Conversation.Ask
         {
             var command = (CreateMessageCommand)request;
 
-            var result = await _chatCompletion.AskAsync<EventStream>(command.message);
+            var result = await _chatCompletion.AskAsync<EventStream>(command.Message);
 
             var message = new EventStream(result.Content);
 

@@ -42,7 +42,6 @@ namespace Orchestrator.Module
 
             services.AddScoped<ChatCompletionsOptionsFactory>(sp =>
             {
-
                 return messages =>
                 {
                     var options = new ChatCompletionsOptions
@@ -51,12 +50,9 @@ namespace Orchestrator.Module
                         Temperature = 0.8f,
                         MaxTokens = 2048
                     };
-
-                    foreach (var msg in messages)
-                    {
-                        options.Messages.Add(new ChatRequestUserMessage(msg));
-                    }
-
+                                       
+                    options.Messages.Add(new ChatRequestUserMessage(messages.Question));
+                    
                     return options;
                 };
             });

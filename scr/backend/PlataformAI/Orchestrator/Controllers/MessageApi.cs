@@ -13,7 +13,7 @@ namespace Orchestrator.Controllers
             return NoContent();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateMessage([FromServices] CreateMessageCommandHandler handler, CreateMessageCommand command)
+        public async Task<IActionResult> CreateMessage([FromServices] CreateMessageCommandHandler handler,[FromForm] CreateMessageCommand command )
         {
            var result = await handler.Handle(command, CancellationToken.None);
 

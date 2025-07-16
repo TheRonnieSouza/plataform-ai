@@ -6,7 +6,7 @@ namespace Orchestrator.Conversation.Mensagens
     {
         public string Question { get; set; } = string.Empty;
         public string Answer { get; set; } = string.Empty;
-        public IFormFileCollection Files { get; set; } 
+        public IFormFileCollection Files { get; set; } = default!;
 
         public Message() { }
 
@@ -23,7 +23,8 @@ namespace Orchestrator.Conversation.Mensagens
                 var memory = new MemoryStream();
                 item.OpenReadStream().CopyToAsync(memory);
 
-                files.Add(new Media(memory.ToArray(), item.ContentType));
+                var media = new Media(memory.ToArray(), item.ContentType);
+                files.Add(media);
             }
             return files;
         }

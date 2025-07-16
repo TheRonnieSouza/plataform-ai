@@ -2,7 +2,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Orchestrator.Conversation.Completion;
-using System.Reflection.Metadata.Ecma335;
+using Orchestrator.Conversation.Mensagens;
 
 namespace Orchestrator.Conversation.LLM
 {

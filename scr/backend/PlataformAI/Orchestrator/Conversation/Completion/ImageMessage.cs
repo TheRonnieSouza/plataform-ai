@@ -1,11 +1,11 @@
 ﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Orchestrator.Conversation.Mensagens;
 
 namespace Orchestrator.Conversation.Completion
 {
     public class ImageMessage : IChatCompletionBuilder
-    {
-        //Todo Implent
+    {        
         public bool CanBuild(Message message)
         {
             return message.Files.Count() > 0;

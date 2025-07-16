@@ -1,4 +1,5 @@
 ﻿using Microsoft.SemanticKernel.ChatCompletion;
+using Orchestrator.Conversation.Mensagens;
 
 namespace Orchestrator.Conversation.Completion
 {

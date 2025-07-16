@@ -1,4 +1,6 @@
-﻿namespace Orchestrator.Conversation
+﻿using Orchestrator.Conversation.Mensagens;
+
+namespace Orchestrator.Conversation
 {
     public interface IConversationCompletionService
     {
