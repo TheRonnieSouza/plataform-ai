@@ -7,8 +7,8 @@ namespace Orchestrator.Conversation.Completion
     public class ImageMessage : IChatCompletionBuilder
     {        
         public bool CanBuild(Message message)
-        {
-            return message.Files.Count() > 0;
+        {            
+            return message.Files == null ? false : message.Files!.Any();
         }
 
         public ChatHistory CreateChatHistory(Message message)
@@ -17,7 +17,7 @@ namespace Orchestrator.Conversation.Completion
 
             foreach (var file in message.GetFilesBytes())
             {
-                chatHistory.AddUserMessage(new ChatMessageContentItemCollection()
+                chatHistory.AddMessage(AuthorRole.User, new ChatMessageContentItemCollection()
                 {
                     new ImageContent(file.Data, file.ContentType)
                 });

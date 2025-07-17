@@ -7,8 +7,8 @@ namespace Orchestrator.Conversation.Completion
     {
         public bool CanBuild(Message message)
         {
-            return message.Files.Count == 0 && string.IsNullOrEmpty(message.Question) ;
-        }
+            return message.Files == null && !string.IsNullOrEmpty(message.Question);
+        }   
 
         public ChatHistory CreateChatHistory(Message message)
         {

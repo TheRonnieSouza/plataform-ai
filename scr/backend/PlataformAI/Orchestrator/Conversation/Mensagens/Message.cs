@@ -6,7 +6,7 @@ namespace Orchestrator.Conversation.Mensagens
     {
         public string Question { get; set; } = string.Empty;
         public string Answer { get; set; } = string.Empty;
-        public IFormFileCollection Files { get; set; } = default!;
+        public IFormFileCollection? Files { get; set; } = default!;
 
         public Message() { }
 
