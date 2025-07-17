@@ -1,4 +1,6 @@
-﻿namespace Orchestrator.Conversation
+﻿using Orchestrator.Conversation.Mensagens;
+
+namespace Orchestrator.Conversation
 {
     public interface IConversationCompletionService
     {
@@ -9,6 +11,6 @@
         /// <param name="contextMessages">A collection of context messages to include in the request.</param>
         /// <returns>A task that represents the asynchronous operation, containing the response of type T.</returns>
     
-        Task<T> AskAsync<T>(IEnumerable<string> contextMessages);
+        Task<T> AskAsync<T>(Message message);
     }
 }

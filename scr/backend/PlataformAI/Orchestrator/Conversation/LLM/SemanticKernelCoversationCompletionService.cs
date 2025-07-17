@@ -1,6 +1,8 @@
 ﻿using Common.Models;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Orchestrator.Conversation.Completion;
+using Orchestrator.Conversation.Mensagens;
 
 namespace Orchestrator.Conversation.LLM
 {
@@ -14,20 +16,27 @@ namespace Orchestrator.Conversation.LLM
         }
 
 
-        public async Task<T> AskAsync<T>(IEnumerable<string> contextMessages)
+        public async Task<T> AskAsync<T>(Message message)
         {
-            var  chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
+            var chatMessageContents = new ChatHistory();
 
-            string message = contextMessages.FirstOrDefault() ?? string.Empty;
+            var chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
+                        
+            var builder = new List<IChatCompletionBuilder>
+            {
+                new ImageMessage(),
+                new ChatMessage(),
+            };
 
-            ChatHistory chatMessageContents = new ChatHistory(message, AuthorRole.System);
+            foreach(var build in builder)
+            {
+                chatMessageContents = build.CanBuild(message) ? build.CreateChatHistory(message) : chatMessageContents;
+            }            
 
             var result = await chatCompletionService.GetChatMessageContentAsync(chatMessageContents);
             
             var evento =   new EventStream(result);
             return (T)(object)evento;
-
-
         }
     }
 }

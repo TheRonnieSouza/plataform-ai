@@ -1,5 +1,6 @@
 ﻿using Azure.AI.Inference;
 using Orchestrator.Conversation.Factory;
+using Orchestrator.Conversation.Mensagens;
 
 namespace Orchestrator.Conversation.LLM
 {
@@ -14,9 +15,9 @@ namespace Orchestrator.Conversation.LLM
             _optionsFactory = completionFactory;
         }
 
-        public async Task<ChatCompletions> AskAsync<ChatCompletions>(IEnumerable<string> contextMessages)
+        public async Task<ChatCompletions> AskAsync<ChatCompletions>(Message message)
         {
-            var options = _optionsFactory(contextMessages);
+            var options = _optionsFactory(message);
 
             var response = await _client.CompleteAsync(options);
 
