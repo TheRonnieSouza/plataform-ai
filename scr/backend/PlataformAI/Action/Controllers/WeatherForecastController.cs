@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using ModelContextProtocol.Server;
+using System.ComponentModel;
 
 namespace Action.Controllers
 {
+    [McpServerToolType]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -18,6 +21,7 @@ namespace Action.Controllers
             _logger = logger;
         }
 
+        [McpServerTool, Description("Return the weather to the client.")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -28,6 +32,13 @@ namespace Action.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [McpServerTool, Description("Return the time zone to the client, passing the parameter string country")]
+        [HttpGet(Name = "GetTimeZone")]
+        public  ActionResult<string> GetTimeZone(string country)
+        {
+            return Ok("New York");
         }
     }
 }
